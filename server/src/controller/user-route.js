@@ -1,12 +1,12 @@
-import { Express } from "express";
+import express from "express";
 import userRepository from "../repository/user-repository.js";
 
-const router = Express.Router();
+const router = express.Router();
 //get all users
 router.get("/", async (req, res, next) => {
     try {
         let users = await userRepository.getAllUsers();
-        return res.status(200).send(users);
+        return res.status(200).json(users);
     }catch (error) {
         return next({status: 404, message:error});
     }

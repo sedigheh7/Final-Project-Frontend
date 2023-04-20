@@ -14,21 +14,27 @@ const getPostById = async (postId) => {
     const post = await Post.findOne({ where: { id: postId } });
     return post;
 };
-
-const getAllPostsByUser = async (userId) => {
-    try {
-      const user = await User.findByPk(userId, {
-        include: {
-          model: Post,
-          as: 'posts'
-        }
-      });
+const getAllPostsByUser = async (pUserId) => {
+  try {
+    return await Post.findAll({ where: { UserId: pUserId } });
+  } catch (error) {
+    console.log(error);
+  }
+};
+// const getAllPostsByUser = async (UserId) => {
+//     try {
+//       const user = await User.findByPk(UserId, {
+//         include: {
+//           model: Post,
+//           as: 'Post'
+//         }
+//       });
   
-      return user.posts;
-    } catch (error) {
-      throw new Error(`Error fetching posts for user with id ${userId}: ${error.message}`);
-    }
-  };
+//       return user.posts;
+//     } catch (error) {
+//       throw new Error(`Error fetching posts for user with id ${UserId}: ${error.message}`);
+//     }
+//   };
 
   const editPost = async (postId, updatedPostData) => {
     try {
@@ -37,9 +43,9 @@ const getAllPostsByUser = async (userId) => {
         where: { id: postId }
       });
   
-      if (rowsUpdated !== 1) {
-        throw new Error(`Error updating post with id ${postId}`);
-      }
+      // if (rowsUpdated !== 1) {
+      //   throw new Error(`Error updating post with id ${postId}`);
+      // }
   
       return updatedPost;
     } catch (error) {
@@ -50,7 +56,7 @@ const getAllPostsByUser = async (userId) => {
   async function deletePost(puserId){
     await Customer.destroy({
         where: {
-          id: pUserId
+          id: puserId
         }
        }); 
 }
@@ -62,5 +68,5 @@ export default {
     getPostById,
     getAllPostsByUser,
     editPost,
-    deletepost
+    deletePost
 };

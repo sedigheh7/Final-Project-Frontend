@@ -21,6 +21,6 @@ const Post = sequelize.define('Post', {
       type: DataTypes.DATE
     }
   }, {
-    tableName: 'posts',
+    tableName: 'Posts',
   });
 export default Post;

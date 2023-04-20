@@ -2,9 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import postService from '../services/postService';
 import { Container, Row, Col } from 'react-bootstrap';
+import Comment from './comment.js';
+// import commentService from '../services/commentService';
 
 function Post() {
   const [post, setPost] = useState();
+  // const [comment, setComment] = useState()
   const { postId } = useParams()
 
   const getPostById = async () => {
@@ -13,10 +16,20 @@ function Post() {
       setPost(fetchedPost);
     }
   }
+
+  // const getCommentByPostId = async () => {
+  //   const fetchedComment = await commentService.getCommentByPostId(postId)
+  //   if (fetchedComment) {
+  //     setComment(fetchedComment);
+  //   }
+  // }
+
   useEffect(() => {
     getPostById()
+    // getCommentByPostId()
 
   }, []);
+
 
 
   return (
@@ -43,11 +56,12 @@ function Post() {
             <Row>
               <div className='text-start text-light mb-5'>{post?.content}</div>
             </Row>
+            <Comment />
           </Container>
         </>
         :
         <h1>
-          post not found :(
+          post not found :
         </h1>
       }
     </div>

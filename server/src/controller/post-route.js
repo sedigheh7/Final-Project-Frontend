@@ -4,15 +4,14 @@ import postRepository from "../repository/post-repository.js";
 const router = express.Router();
 
 // Get all posts
-router.get("/", async (req, res, next) => {
-   try {
-      let posts = await postRepository.getAllPosts();
-      return res.status(200).send(posts);
-   } catch (error) {
-      return next({ status: 404, message: error });
-   }
-});
 
+router.get("/", async (req, res) => {
+   const { UserId } = req.query;
+   if (UserId) {
+     return res.json(await postRepository.getAllPostsByUser(UserId));
+   }
+   return res.json(await postRepository.getAllPosts());
+ });
 // Create a new post
 router.post("/", async (req, res, next) => {
    try {
@@ -41,16 +40,16 @@ router.get("/:id", async (req, res, next) => {
 });
 
 // get all posts by a user
-router.get('/:userId/posts', async (req, res) => {
-   const userId = req.params.userId;
+// router.get('/:userId/posts', async (req, res) => {
+//    const userId = req.params.userId;
  
-   try {
-     const posts = await postRepository.getAllPostsByUser(userId);
-     res.json(posts);
-   } catch (error) {
-     res.status(500).json({ message: error.message });
-   }
- });
+//    try {
+//      const posts = await postRepository.getAllPostsByUser(userId);
+//      res.json(posts);
+//    } catch (error) {
+//      res.status(500).json({ message: error.message });
+//    }
+//  });
 
 //edit apost
  router.put('/:postId', async (req, res) => {

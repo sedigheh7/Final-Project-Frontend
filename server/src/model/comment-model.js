@@ -1,6 +1,6 @@
 import sequelize from '../config/connection.js';
 import { DataTypes }  from 'sequelize';  
-const Comment = sequelize.define('comment', {
+const Comment = sequelize.define('Comment', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -21,8 +21,8 @@ const Comment = sequelize.define('comment', {
   });
   
   // Associations
-  const User = require('./User');
-  const Post = require('./Post');
+  import User  from './user-model.js';
+  import Post from './post-model.js';
   
   Comment.belongsTo(User);
   Comment.belongsTo(Post);
