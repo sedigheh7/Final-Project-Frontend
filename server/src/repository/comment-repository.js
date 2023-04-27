@@ -1,65 +1,57 @@
 import Comment from "../model/comment-model.js";
 import Post from "../model/post-model.js";
+import User from "../model/user-model.js";
+
+const updateCommentById = async (pId, newContent) => {
+    return await Comment.update(
+        { content: newContent.content, isEdited: true },
+        { where: { id: pId } }
+    );
+}
+
+const getCommentById = async (pId) => {
+    return await Comment.findOne({
+        where: {
+            id: pId
+        }
+    })
+}
+const deleteCommentById = async (pId) => {
+    return await Comment.destroy({
+        where: {
+            id: pId
+        }
+    })
+}
 const getAllComments = async () => {
-    const comments = await Comment.findAll();
+    return Comment.findAll({
+        include: [
+            {
+                model: User, // include the User model,
+                attributes: ['name']// specify which user attributes to include,
+            },
+        ],
+        attributes: {
+            exclude: ['userId']//we don't need userId anymore because we already have the user's name
+        }
+    });
+}
+const addNewComment = async (pComment) => {
+    return await Comment.create(pComment)
+}
+
+const getCommentsByPostId = async (postId) => {
+    const comments = await Comment.findAll({
+        where: { postId: postId }
+    });
     return comments;
-};
-
-
-
-const createComment = async (pComment) => {
-    const newComment = await Comment.create(pComment);
-    return newComment;
-};
-const getCommentById = async (pCommentId) => {
-    const Comment = await Comment.findOne({ where: { id: pCommentId } });
-    return Comment;
-};
-
-// const getAllCommentsByPost = async (postId) => {
-//     try {
-//       const post = await Post.findByPk(postId, {
-//         include: {
-//           model: Comment,
-//           as: 'Comments'
-//         }
-//       });
-  
-//       return post.Comments;
-//     } catch (error) {
-//       throw new Error(`Error fetching Comments for user with id ${postId}: ${error.message}`);
-//     }
-//   };
-const getAllCommentsByPost = async (pPostId) => {
-  try {
-    return await Comment.findAll({ where: { PostId: pPostId } });
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-  const editComment = async (CommentId, updatedCommentData) => {
-    try {
-      const [rowsUpdated, [updatedComment]] = await Comment.update(updatedCommentData, {
-        returning: true,
-        where: { id: CommentId }
-      });
-  
-      if (rowsUpdated !== 1) {
-        throw new Error(`Error updating Comment with id ${CommentId}`);
-      }
-  
-      return updatedComment;
-    } catch (error) {
-      throw new Error(`Error updating Comment with id ${CommentId}: ${error.message}`);
-    }
-  };
-
+}
 
 export default {
-    getAllComments,
-    createComment,
+    getCommentsByPostId,
+    updateCommentById,
     getCommentById,
-    getAllCommentsByPost,
-    editComment,
-};
+    deleteCommentById,
+    addNewComment,
+    getAllComments
+}

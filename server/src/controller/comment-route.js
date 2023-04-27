@@ -2,27 +2,25 @@ import  express  from "express";
 import commentRepository from "../repository/comment-repository.js";
 
 const router = express.Router();
-// Get all comments
-// router.get("/", async (req, res, next) => {
-//     try {
-//        let comments = await commentRepository.getAllComments();
-//        return res.status(200).send(comments);
-//     } catch (error) {
-//        return next({ status: 404, message: error });
-//     }
-//  });
- router.get("/", async (req, res) => {
-   const { PostId } = req.query;
-   if (PostId) {
-     return res.json(await commentRepository.getAllCommentsByPost(PostId));
+router.get("/", async (req, res,next) => {
+   try {
+      const postId = req.query.postId;
+      let comments = [];
+      if (postId) {
+         comments = await commentRepository.getCommentsByPostId(postId);
+      } else {
+         comments = await commentRepository.getAllComments();
+      }
+      res.status(200).send(comments);
+   } catch (error) {
+      next({status:500,message:`Internal Server Error: ${error}`})
    }
-   return res.json(await commentRepository.getAllComments());
- });
+});
 // Create a new Comment
 router.post("/", async (req, res, next) => {
    try {
       const { body } = req;
-      const newComment = await commentRepository.createComment(body);
+      const newComment = await commentRepository.addNewComment(req.body);
       return res.send(newComment);
    } catch (error) {
       return next({ status: 500, message: error });
@@ -33,40 +31,40 @@ router.post("/", async (req, res, next) => {
 router.get("/:id", async (req, res, next) => {
    try {
       const commentId = req.params.id;
-      const selectedComment = await commentRepository.getCommentById(commentId);
-      if (selectedComment === null)
-         return next({
-            status: 404,
-            message: `Comment with id  ${commentId} not found`,
-         });
-      return res.status(200).send(selectedComment);
-   } catch (err) {
-      return next({ status: 500, message: err });
+      const selectedComment = await commentRepository.getCommentById(req.params.commentId);
+      if (!selectedComment) return res.status(404).send({ msg: "Comment not found" });
+      res.status(200).send(selectedComment);
+   } catch (error) {
+      console.error(error);
+      next({status:500,message:`Internal Server Error: ${error}`})
    }
 });
 
-// get all Comments by a post
-// router.get('/:postId/comments', async (req, res) => {
-//    const postId = req.params.postId;
- 
-//    try {
-//      const Comments = await commentRepository.getAllCommentsByPost(postId);
-//      res.json(Comments);
-//    } catch (error) {
-//      res.status(500).json({ message: error.message });
-//    }
-//  });
 
 //edit aComment
- router.put('/:commentId', async (req, res) => {
-   const CommentId = req.params.CommentId;
-   const updatedCommentData = req.body;
- 
+router.put("/:id", async (req, res,next) => {
    try {
-     const updatedComment = await commentRepository.editComment(CommentId, updatedCommentData);
-     res.json(updatedComment);
+      const { id } = req.params;
+      const updatedComment = req.body;
+      const comment = await commentRepository.updateCommentById(id, updatedComment);
+      if (!comment) {
+         return res.status(404).send({ msg: "Comment not found" });
+      }
+      res.status(200).send(comment);
    } catch (error) {
-     res.status(500).json({ message: error.message });
+      next({status:500,message:`Internal Server Error: ${error}`})
    }
- });
+});
+
+// Delete a comment by id
+router.delete("/:id", async (req, res ,next) => {
+   try {
+      const { id } = req.params;
+      await commentRepository.deleteCommentById(id);
+      res.status(200).json({ msg: `Comment with id ${id} was deleted` });
+   } catch (error) {
+      console.error(error);
+      next({status:500,message:`Internal Server Error: ${error}`})
+   }
+});
  export default router

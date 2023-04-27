@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import postService from '../services/postService';
 import { Container, Row, Col } from 'react-bootstrap';
-import Comment from './comment.js';
-// import commentService from '../services/commentService';
+import commentService from '../services/commentService';
+import Card from 'react-bootstrap/Card';
 
 function Post() {
   const [post, setPost] = useState();
-  // const [comment, setComment] = useState()
+  const [comments, setComments] = useState([])
   const { postId } = useParams()
 
   const getPostById = async () => {
@@ -17,16 +17,16 @@ function Post() {
     }
   }
 
-  // const getCommentByPostId = async () => {
-  //   const fetchedComment = await commentService.getCommentByPostId(postId)
-  //   if (fetchedComment) {
-  //     setComment(fetchedComment);
-  //   }
-  // }
+  const getCommentByPostId = async () => {
+    const fetchedComment = await commentService.getCommentByPostId(postId)
+    if (fetchedComment) {
+      setComments(fetchedComment);
+    }
+  }
 
   useEffect(() => {
     getPostById()
-    // getCommentByPostId()
+    getCommentByPostId()
 
   }, []);
 
@@ -56,7 +56,27 @@ function Post() {
             <Row>
               <div className='text-start text-light mb-5'>{post?.content}</div>
             </Row>
-            <Comment />
+            
+            <Row>
+          <Col >
+            <h2 className='text-white'>Comments</h2>
+            {comments && comments.length > 0 ? (
+              comments.map(comment => (
+                <Card body className='mt-2' key={comment.id}>
+                  <p>{comment.content}</p>
+                  <small>By {comment.User.name} on {new Intl.DateTimeFormat("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "2-digit",
+                  }).format(new Date(comment.createdAt))}</small>
+                </Card>
+           
+              ))
+            ) : (
+              <p>No comments yet.</p>
+            )}
+          </Col>
+        </Row>
           </Container>
         </>
         :

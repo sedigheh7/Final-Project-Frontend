@@ -3,14 +3,14 @@ import Post from "../model/post-model.js";
 import User from "../model/user-model.js";
 import Comment from "../model/comment-model.js";
 
-User.hasMany(Comment);
-Comment.belongsTo(User);
+User.hasMany(Comment, { foreignKey: 'userId', onDelete: "CASCADE" });
+Comment.belongsTo(User, { foreignKey: 'userId' });
 
-Post.hasMany(Comment);
-Comment.belongsTo(Post);
+Post.hasMany(Comment, { foreignKey: 'postId' });
+Comment.belongsTo(Post, { foreignKey: 'postId' });
 
-User.hasMany(Post);
-Post.belongsTo(User);
+User.hasMany(Post, { foreignKey: 'userId', onDelete: 'CASCADE' });
+Post.belongsTo(User, { foreignKey: 'userId' });
 
 const connectToDatabase = async () => {
   try {

@@ -20,6 +20,16 @@ const createPost = async (pNewPost) => {
   }
 };
 
+const getPostsByUserId = async (userId) => {
+  try {
+    const response = await api.get(`/posts?userId=${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
 const getPostById = async (postId) => {
   try {
     const response = await api.get(`/posts/${postId}`);
@@ -32,10 +42,20 @@ const getPostById = async (postId) => {
   }
 };
 
+// pdf
+const createPdfById = async (pId) => {
+  const response = await api.get(`/posts/pdf/${pId}`);
+  const data = await response.json();
+  return data
+}
+
+
 const postService = {
   getPosts,
   createPost,
   getPostById,
+  getPostsByUserId,
+  createPdfById
 };
 
 export default postService;

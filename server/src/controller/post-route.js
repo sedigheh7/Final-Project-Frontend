@@ -1,7 +1,14 @@
 import express from "express";
 import postRepository from "../repository/post-repository.js";
+import printPDF from "../repository/pdf-repository.js";
 
 const router = express.Router();
+
+// pdf
+router.get("/:id", async(req, res)=>{
+   res.json(await postRepository.getPostById(req.params.id));
+   await printPDF(req.params.id)
+})
 
 // Get all posts
 
