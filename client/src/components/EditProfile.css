@@ -1,0 +1,36 @@
+/* ProfileForm.css */
+
+.editprofile-form {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .editprofile-form input[type="text"],
+  .editprofile-form input[type="email"],
+  .editprofile-form input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .editprofile-form button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .editprofile-form button[type="submit"]:hover {
+    background-color: #0069d9;
+  }
+  
+  .editprofile-form .error-message {
+    color: red;
+    margin-bottom: 10px;
+  }
+  
