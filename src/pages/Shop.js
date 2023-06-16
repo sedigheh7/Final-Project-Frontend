@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { CartContext } from '../contexts/cartContext';
 import { CustomerContext } from '../contexts/customerContext';
 import productService from '../services/productService';
+import './shop.css'
 
 const ShopPage = () => {
   const customer = useContext(CustomerContext);
@@ -22,18 +23,22 @@ const ShopPage = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Shop Page</h1>
+    <>
+    <h1>Shop</h1>
+    <div className="shop-page">
+      
       {products.map((product) => (
-        <div key={product.id}>
-          <h3>{product.name}</h3>
+        <div className="product-card" key={product.id}>
+           <img src={`http://localhost:9000/api/v1/products/${product.id}/image`}/>
           <p>Code: {product.code}</p>
           <p>Size: {product.size}</p>
+          <p>Description: {product.description}</p>
           <p>Price: ${product.price}</p>
           <button onClick={() => addToCart(product)}>Add to Cart</button>
         </div>
       ))}
     </div>
+    </>
   );
 };
 

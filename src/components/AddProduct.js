@@ -29,7 +29,7 @@ const AddProduct = () => {
     productImage: Yup.mixed().required("Image is required"),
   });
 
-  const handleSubmit = async (values) => {
+  const handleSubmit = async (values, { resetForm }) => {
     
     try {
       console.log(values);
@@ -48,7 +48,8 @@ const AddProduct = () => {
         method: "POST",
         body: formDataToSave,
       });
-      const data = await response.json();
+      // const data = await response.json();
+      resetForm();
     } catch (error) {
       console.error(error);
     }
