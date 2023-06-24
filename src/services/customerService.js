@@ -43,7 +43,7 @@ const getCustomersProfile = async (id) => {
 
 const updateCustomerInfo = async (pCustomerId, pCustomerObject) => {
   try {
-    const response = await api.put(`/customers/${pCustomerId}`,pCustomerObject);
+    const response = await api.put(`/customers/${pCustomerId}`, pCustomerObject);
     return response.data
   } catch (error) {
     console.error(error.message);

@@ -19,10 +19,11 @@ import Dashboard from './pages/Dashboard';
 import ProtectedRoute from './components/ProtectedRoute';
 import WelcomePage from './pages/WelcomePage.js';
 import AddProduct from './components/AddProduct.js';
-import Products from './components/Prodacts.js';
+import Products from './components/Products.js';
 import EditProfilePage from './components/EditProfile.js';
-import { CartContextProvider } from './contexts/cartContext';
-import { CustomerContextProvider} from './contexts/customerContext';
+import ShippingAddress from './components/ShippingAddress.js';
+import EditShippingAddressPage from './components/EditShippingAddress.js';
+import CheckoutForm from './components/StripePayment.js'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -87,9 +88,21 @@ const router = createBrowserRouter([
       {
         path: "add-product",
         element: <AddProduct />
+      },
+      {
+        path: "add-shipping-address",
+        element: <ShippingAddress />
+      },
+      {
+        path: "Edit-shipping-address",
+        element: <EditShippingAddressPage />
+      },
+      {
+        path: "check-out",
+        element: <CheckoutForm />
       }
     ],
-    errorElement: <h1 className='text-center text-light'>404 not found :(</h1>
+    errorElement: <h1 className='text-center text-light'>404 not found :( </h1>
   }
 ]);
 const root = ReactDOM.createRoot(document.getElementById('root'));

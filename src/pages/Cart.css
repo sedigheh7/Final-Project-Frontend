@@ -1,0 +1,116 @@
+.cart-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .cart-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .cart-item img {
+    width: 100px;
+    margin-right: 1rem;
+  }
+  
+  .cart-item-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .cart-item-content h3,
+  .cart-item-content p,
+  .cart-item-content label,
+  .cart-item-content input {
+    margin-bottom: 0.5rem;
+  }
+.remove-button{
+    background-color: #2709cf;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+} 
+.remove-button:hover{
+    background-color: #ff0000;
+} 
+
+/* shipping address */
+/* Cart.css */
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+label {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 5px;
+}
+
+#sameAddress {
+  margin-top: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+button:disabled:hover {
+  background-color: #ccc;
+}
+div.checkout-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  margin-right: 40px;
+}
+#checkoutButton {
+  margin-top: 20px;
+  align-self: flex-end;
+  padding: 10px 20px;
+  background-color: blue;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+#checkoutButton:hover {
+  background-color: #45a049;
+}

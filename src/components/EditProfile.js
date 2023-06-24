@@ -10,31 +10,20 @@ const EditProfilePage = () => {
     lastName: '',
     birthday:'',
     email:'',
-    addressLine1:'',
-    city:'',
-    postalCode:'',
-    state:'',
-    country:'',
-    // Add other form fields
   });
   const customer = useContext(CustomerContext)
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const response = await CustomerService.getCustomersProfile(customer.id); // Adjust the API endpoint as per your server configuration
+        const response = await CustomerService.getCustomersProfile(customer.id);
         console.log(response)
-        const { firstName, lastName,birthday,email,ShippingAddress:{addressLine1,city,postalCode,state,country} /* other fields */ } = response;
+        const { firstName, lastName,birthday,email} = response;
         console.log("peson data",response)
         setFormData({ firstName,
                      lastName,
                       birthday,
                       email,
-                      addressLine1,
-                      city,
-                      postalCode,
-                      state,
-                      country
-                      /* other fields */ });
+                      });
       } catch (error) {
         console.error('Error retrieving user profile:', error);
       }
@@ -78,24 +67,6 @@ const EditProfilePage = () => {
       email:
         <input type="text" name="email" value={formData.email} onChange={handleChange} />
       </label>
-      <h1>Shipping Address:</h1>
-      <label>
-      addressLine1:
-        <input type="text" name="addressLine1" value={formData.addressLine1} onChange={handleChange} />
-      </label> <label>
-      city:
-        <input type="text" name="city" value={formData.city} onChange={handleChange} />
-      </label> <label>
-      postalCode:
-        <input type="text" name="postalCode" value={formData.postalCode} onChange={handleChange} />
-      </label> <label>
-      state:
-        <input type="text" name="state" value={formData.state} onChange={handleChange} />
-      </label> <label>
-      country:
-        <input type="text" name="country" value={formData.country} onChange={handleChange} />
-      </label>
-      {/* Add other form fields */}
       <button type="submit">Save</button>
     </form>
   );
