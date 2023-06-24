@@ -2,11 +2,8 @@ import React, { useContext, useEffect,useState } from "react";
 import { CartContext } from "../contexts/cartContext";
 import "./Cart.css";
 import { useNavigate } from "react-router-dom";
-import { loadStripe } from '@stripe/stripe-js';
-import { Elements } from '@stripe/react-stripe-js';
-import CheckoutForm from '../components/StripePayment.js';
 
-const stripePromise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY);
+
 
 const CartPage = () => {
   const {
@@ -23,7 +20,7 @@ const CartPage = () => {
 
   useEffect(()=>{
     getCartItems();
-  })
+  }, [])
 
   const handleShippingAddressPage = () => {
     navigate("/add-shipping-address");
@@ -54,41 +51,11 @@ const CartPage = () => {
 
   const calculateTotalPrice = () => {
     return cartItems?.reduce((prev, next) => {
-      prev += next.quantity * next.price;
+      console.log(prev, next.quantity, next.amount)
+      prev += next.quantity * next.amount;
       return prev;
     }, 0);
   };
-  // const totalPrice = cartItems.reduce((total, item) => {
-  //   const itemPrice = parseFloat(item.price);
-  //   const itemQuantity = parseInt(item.quantity);
-
-  //   if (isNaN(itemPrice) || isNaN(itemQuantity)) {
-  //     return total;
-  //   }
-
-  //   return total + itemPrice * itemQuantity;
-  // }, 0);
-
-  // return totalPrice.toFixed(2); // Convert the total price to a string with 2 decimal places
-
-  // const calculateTotalPrice = () => {
-  //   return cartItems.reduce((total, item) => {
-  //     const itemPrice = parseFloat(item.price);
-  //     const itemQuantity = parseInt(item.quantity);
-
-  //     if (isNaN(itemPrice) || isNaN(itemQuantity)) {
-  //       return total; // Skip the invalid item and continue with the next iteration
-  //     }
-
-  //     return total + itemPrice * itemQuantity;
-  //   }, 0);
-  // };
-
-  // const calculateTotalPrice = () => {
-  //   return cartItems.reduce((total, item) => {
-  //     return total + item.price * item.quantity;
-  //   }, 0);
-  // };
 
   return (
     <>
@@ -101,7 +68,7 @@ const CartPage = () => {
             {cartItems.map((item) => (
               <li key={item.id} className="cart-item">
                 <img
-                  src={`http://localhost:9000/api/v1/products/${item.id}/image`}
+                  src={`http://localhost:9000/api/v1/products/${item.productId}/image`}
                   alt="paint"
                 />
                 <div className="cart-item-content">

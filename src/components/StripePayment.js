@@ -1,11 +1,21 @@
 import React from 'react';
 import { loadStripe } from '@stripe/stripe-js';
-import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-// import * as dotenv from "dotenv";
-// dotenv.config();
-const stripePromise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY);
+import { CardElement, useStripe, useElements, Elements } from '@stripe/react-stripe-js';
 
-const CheckoutForm = () => {
+//console.log("process.env.STRIPE_PUBLISHABLE_KEY", process.env.STRIPE_PUBLISHABLE_KEY)
+
+//const stripePromise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY);
+const stripePromise = loadStripe("pk_test_51NL8ZOJQMNMCvmfAD3VTJ1rQ6dMCMriOcvSyTaU6FqzdK3a0WbOvrsFQfULfsI0mYV6BQJ5FGPzXUbxueZZAaWhk00wVmc6GYf");
+
+
+  const Wrapper = (props) => (
+    <Elements stripe={stripePromise}>
+      <CheckoutForm {...props} />
+    </Elements>
+  );
+  
+
+  const CheckoutForm = () => {
     const stripe = useStripe();
     const elements = useElements();
   
@@ -48,4 +58,6 @@ const CheckoutForm = () => {
       </form>
     );
   };
-  export default CheckoutForm
+
+
+  export default Wrapper

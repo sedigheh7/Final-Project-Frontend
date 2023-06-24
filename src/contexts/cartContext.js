@@ -1,4 +1,4 @@
-import { createContext, useState,useContext } from 'react';
+import { createContext, useState,useContext, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { initializeHttpService } from '../services/httpService';
 import useCheckCustomer from '../hooks/useCheckCustomer';
@@ -16,12 +16,14 @@ export const CartContextProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const customer = useContext(CustomerContext)
 
+  useEffect(() => {
+    getCartItems();
+  }, [customer]);
 
   const addToCart = (product) => {
     setCartItems((prevItems) => [...prevItems, product]);
     addProductToCart(customer.id,product)
   };
-
 
   const removeFromCart = (product) => {
     setCartItems((prevItems) => prevItems.filter((item) => item.id !== product.id));
@@ -60,7 +62,7 @@ export const CartContextProvider = ({ children }) => {
     try {
       const customerId = customer.id
       const response = await api.get(`/customers/customer-cart/${customerId}`);
-      return response.data;
+      setCartItems(response.data);
     } catch (error) {
       throw new Error('Error while retrieving cart data');
     }
