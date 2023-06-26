@@ -2,16 +2,16 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink } from "react-router-dom";
 import { faInstagram, faFacebook } from "@fortawesome/free-brands-svg-icons";
-import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import "./Footer.css"
 
 const Footer = () => {
   return (
-    <div className="footer container-fluid fixed-bottom">
-      <Row className="d-flex justify-content-between ">
+    <div className="footer container-fluid fixed-bottom bg-white shadow">
+      <Row className="d-flex ">
         <Col className="g-3" lg={6}>
-          <NavLink className="nav-link me-3" to="/about-me">
+          <NavLink className="nav-link" to="/about-me">
             About Me
           </NavLink>
           <NavLink className="nav-link" to="/contact-us">
@@ -19,11 +19,12 @@ const Footer = () => {
           </NavLink>
         </Col>
        
-        <Col className="iconsFooter g-4" lg={6}>
+        <Col className="iconsFooter g-4 d-flex flex-row-reverse " lg={6}>
           <NavLink
             to="https://instagram.com/original.painting.ela2020?igshid=NTc4MTIwNjQ2YQ=="
             target="blank"
-            className="ms-4"
+            className="ms-4 fa-icon"
+            
           >
             <FontAwesomeIcon icon={faInstagram} className="mx-auto" />
           </NavLink>
@@ -31,6 +32,7 @@ const Footer = () => {
           <NavLink
             to="https://www.facebook.com/elahe.asgarifard.90?mibextid=ZbWKwL"
             target="blank"
+            className="fa-icon" 
           >
             <FontAwesomeIcon icon={faFacebook} />
           </NavLink>

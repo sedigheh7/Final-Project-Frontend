@@ -1,6 +1,8 @@
-.footer {
+
+
+/* .footer {
   position: fixed;
-    /* height: 100px; */
+    /* height: 100px; 
     bottom: 0;
     width: 100%;
     margin-top: 250px;
@@ -12,7 +14,7 @@
    }
    .iconsFooter > *:not(:last-child) {
     margin-right: 15px;
-  }
+  }*/
   .hometext {
     color: darkblue;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -26,7 +28,7 @@
   .navLogoFoto {
     width: 100px;
     height: 100px;
-  }
+  } 
   /* .copy-right{
     margin-left: 350px;
   } */
