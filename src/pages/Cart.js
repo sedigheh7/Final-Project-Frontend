@@ -73,7 +73,7 @@ const CartPage = () => {
                 />
                 <div className="cart-item-content">
                   <h3>Code:{item.code}</h3>
-                  <p>Price: ${item.price}</p>
+                  <p>Price: ${item.amount}</p>
                   <label htmlFor={`quantity-${item.id}`}>Quantity:</label>
                   <input
                     type="number"
