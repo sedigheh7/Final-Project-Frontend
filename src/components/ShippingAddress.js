@@ -2,12 +2,13 @@ import React, {useContext} from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { CustomerContext } from "../contexts/customerContext";
-import ShippingAddressService from "../services/shippingAddressService.js"
+import ShippingAddressService from "../services/shippingAddressService.js";
+import "./ShippingAddress.css"
 
 const ShippingAddressForm = () => {
   const initialValues = {
-    name: '',
     lastName: '',
+    firstName: '',
     addressLine1: '',
     addressLine2: '',
     city: '',
@@ -17,8 +18,8 @@ const ShippingAddressForm = () => {
   };
 
   const validationSchema = Yup.object().shape({
-    name: Yup.string().required('Required'),
     lastName: Yup.string().required('Required'),
+    firstName: Yup.string().required('Required'),
     addressLine1: Yup.string().required('Required'),
     city: Yup.string().required('Required'),
     state: Yup.string().required('Required'),
@@ -29,8 +30,7 @@ const ShippingAddressForm = () => {
   const handleSubmit = async (values, { resetForm }) => {
     try {
       const response = await ShippingAddressService.saveShippingAddress(customer.id, values);
-      console.log(response.data);
-
+      
       // Reset the form after successful submission
       resetForm();
     } catch (error) {
@@ -43,9 +43,9 @@ const ShippingAddressForm = () => {
     <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
       <Form>
         <div>
-          <label htmlFor="name">Name</label>
-          <Field type="text" id="name" name="name" />
-          <ErrorMessage name="name" component="div" />
+          <label htmlFor="firstName">Name</label>
+          <Field type="text" id="firstName" name="firstName" />
+          <ErrorMessage name="firstName" component="div" />
         </div>
 
         <div>
@@ -91,8 +91,12 @@ const ShippingAddressForm = () => {
         </div>
 
         <button type="submit">Submit</button>
+        <div style={{ height: "100px" }}>
+
+          </div>
       </Form>
     </Formik>
+    
   );
 };
 

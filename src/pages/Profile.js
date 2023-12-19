@@ -41,7 +41,7 @@ export const Profile = () => {
       <Row className="align-items-center profile-header mb-5  text-md-left">
         <Col md={2}>
           <img
-            src={userProfile?.picture}
+            src={customer?.picture}
             alt="Profile"
             className="profile-picture "
           />

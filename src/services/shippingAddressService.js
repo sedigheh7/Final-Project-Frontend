@@ -1,4 +1,5 @@
 import { api } from "./httpService";
+
 const saveShippingAddress = async (pCustomerId, shippingAddress) => {
     try {
       //TODO 
@@ -10,10 +11,10 @@ const saveShippingAddress = async (pCustomerId, shippingAddress) => {
     }
   };
 
-  const updateCustomersSippingAddressInfo = async (pCustomerId, pAddressId) => {
+  const updateCustomersSippingAddressInfo = async (pCustomerId, shippingAddressData) => {
     try {
       //`/customers/${pCustomerId}/shipping-addresses/${pAddressId}`
-      const response = await api.put(`/shippingAddress/customersShippingAddress/${pCustomerId}/${pAddressId}`); // formdata
+      const response = await api.put(`/customers/customersShippingAddress/${pCustomerId}`, shippingAddressData); // formdata
       return response.data
     } catch (error) {
       console.error(error.message);

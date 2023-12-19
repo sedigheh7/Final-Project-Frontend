@@ -70,7 +70,7 @@ export default function WelcomePage() {
                                 className="form-check-input"
                                 id="privacyPolicyAccepted"
                             />
-                            <label htmlFor="privacyPolicyAccepted" className="form-check-label text-white">
+                            <label htmlFor="privacyPolicyAccepted" className="form-check-label text-black">
                                 I accept the Privacy Policy
                             </label>
                             <ErrorMessage

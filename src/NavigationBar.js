@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import Image from "react-bootstrap/Image";
 import logo from "./logo/ela-logo.png";
-import { BsFillCartFill, BsFillPersonFill } from "react-icons/bs";
+import { BsCheckLg, BsFillCartFill, BsFillPersonFill } from "react-icons/bs";
 import LoginButton from "./components/LoginButton.js";
 import LogoutButton from "./components/LogoutButton.js";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -14,6 +14,7 @@ const NavigationBar = () => {
   const { isAuthenticated, isLoading, user } = useAuth0();
   const customer = useContext(CustomerContext);
   const { cartItems } = useContext(CartContext);
+  console.log(cartItems)
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white shadow">
       <div className="container-fluid d-flex justify-content-around">
@@ -40,7 +41,7 @@ const NavigationBar = () => {
           </>
         ) : (
           <>
-          {console.log(user)}
+          
           <NavLink className="nav-link" exact to="/">
               Home
             </NavLink>
@@ -54,8 +55,8 @@ const NavigationBar = () => {
             <div className="right-side-links">
               <NavLink className="nav-link" to="/cart">
                 <BsFillCartFill />
-                {cartItems?.length > 0 && (
-                  <span className="cart-item-count">{cartItems.length}</span>
+                {cartItems.items?.length > 0 && (
+                  <span className="cart-item-count">{cartItems.items?.length}</span>
                 )}
               </NavLink>
               <NavLink className="nav-link" to="/profile">

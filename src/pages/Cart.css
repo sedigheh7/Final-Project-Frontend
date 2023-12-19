@@ -39,70 +39,63 @@
 .remove-button:hover{
     background-color: #ff0000;
 } 
-
-/* shipping address */
-/* Cart.css */
-
-h2 {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-form {
+.checkout-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: space-between;
   margin-top: 20px;
+  margin-right: 40px;
 }
 
-label {
-  margin-top: 10px;
-  font-weight: bold;
-}
-
-input {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-top: 5px;
-}
-
-#sameAddress {
-  margin-top: 10px;
-}
-
-button {
+.checkout-container button {
   padding: 10px 20px;
   background-color: #4CAF50;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  margin-top: 10px;
 }
 
-button:hover {
+.checkout-container button:hover {
   background-color: #45a049;
 }
 
-button:disabled {
+.checkout-container button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
 
-button:disabled:hover {
+.checkout-container button:disabled:hover {
   background-color: #ccc;
+}
+
+.total-price {
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.clear-button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+.clear-button:hover {
+  background-color: #ff0000;
 }
 div.checkout-container {
   display: flex;
-  justify-content: flex-end;
+  justify-content:space-around;
   margin-top: 20px;
   margin-right: 40px;
 }
 #checkoutButton {
   margin-top: 20px;
   align-self: flex-end;
-  padding: 10px 20px;
   background-color: blue;
   color: white;
   border: none;

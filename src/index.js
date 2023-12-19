@@ -24,7 +24,7 @@ import Products from './components/Products.js';
 import EditProfilePage from './components/EditProfile.js';
 import ShippingAddress from './components/ShippingAddress.js';
 import EditShippingAddressPage from './components/EditShippingAddress.js';
-import CheckoutForm from './components/StripePayment.js'
+import CheckoutFormWrapper from './components/StripePayment.js'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -100,7 +100,7 @@ const router = createBrowserRouter([
       },
       {
         path: "check-out",
-        element: <CheckoutForm />
+        element: <CheckoutFormWrapper />
       }
     ],
     errorElement: <h1 className='text-center text-light'>404 not found :( </h1>
